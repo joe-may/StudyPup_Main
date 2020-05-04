@@ -30,10 +30,12 @@
         constructor() {
           super({ key: "SceneMainMenu" });
         }
+        
       
         preload() {
-          this.load.image("sprBg0", "{% static 'assets/sprBg0.png' %}");
-          this.load.image("sprBg1", "{% static 'assets/sprBg1.png' %}");
+          this.load.image("snowground", "{% static 'assets/snowground.png' %}");
+          this.load.image("sprBg0", "{% static 'assets/snowfall1.png' %}");
+          this.load.image("sprBg1", "{% static 'assets/snowfall1.png' %}");
           this.load.image("sprBtnPlay", "{% static 'assets/sprBtnPlay.png' %}");
           this.load.image("sprBtnPlayHover", "{% static 'assets/sprBtnPlayHover.png' %}");
           this.load.image("sprBtnPlayDown", "{% static 'assets/sprBtnPlayDown.png' %}");
@@ -120,8 +122,8 @@
       frameWidth: 16,
       frameHeight: 16
     });
-    this.load.image("sprLaserEnemy0", "{% static 'assets/sprLaserEnemy0.png' %}");
-    this.load.image("sprLaserPlayer", "{% static 'assets/sprLaserPlayer.png' %}");
+    this.load.image("sprLaserEnemy0", "{% static 'assets/snowball.png' %}");
+    this.load.image("sprLaserPlayer", "{% static 'assets/snowball.png' %}");
     this.load.spritesheet("sprPlayer", "{% static 'assets/player1.png' %}", {
       frameWidth: 134,
       frameHeight: 186
@@ -166,6 +168,9 @@
       laser: this.sound.add("sndLaser")
     };
 
+    this.add.image(500, 230, 'snowground');
+
+
     this.backgrounds = [];
     for (var i = 0; i < 5; i++) {
       var bg = new ScrollingBackground(this, "sprBg0", i * 10);
@@ -182,7 +187,7 @@
     this.player.x = 400;
     this.player.y = 400;
     
-
+    
     
     this.keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     this.cursors = this.input.keyboard.createCursorKeys();
@@ -339,7 +344,7 @@
         }
       }
     }
-
+    
     for (var i = 0; i < this.backgrounds.length; i++) {
       this.backgrounds[i].update();
     }
@@ -411,7 +416,7 @@ var config = {
   type: Phaser.WEBGL,
   width: 1000,
   height: 462,
-  backgroundColor: "black",
+  backgroundColor: "#cdf9ff",
   physics: {
     default: "arcade",
     arcade: {
