@@ -1,36 +1,17 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Study Pup</title>
-  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-  <script src="{% static 'js/phaser.js' %}"></script> 
+  {% block head %}
+  
+  {% endblock %}
 </head>
 <body>
-  <header class="navbar-fixed">
-    <nav>
-      <div class="nav-wrapper">
-        <ul>
-          <li><a href="/" class="left brand-logo">&nbsp;&nbsp;StudyPup</a></li>
-        </ul>
-        <ul class="right">
-          <li><a href="/about">log in</a></li>
-        </ul>
-      </div>
-    </nav>
-  </header>
-  <main class="container">
-    <script src="{% static 'js/Entities.js' %}"></script>
-    <script src="{% static 'js/SceneMainMenu.js' %}"></script>
-    <script src="{% static 'js/SceneMain.js' %}"></script>
-    <script src="{% static 'js/game.js' %}"></script>
-  </main>
-  <footer class="page-footer">
-    <div class="right">All Rights Reserved, &copy; 2020 StudyPup &nbsp;</div>
-  </footer>
+    {% block content %}
+
+    {% endblock %}
 </body>
 </html>

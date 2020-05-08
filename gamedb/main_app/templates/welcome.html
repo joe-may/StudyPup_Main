@@ -1,8 +1,12 @@
 {% extends 'base.html' %}
+
+{% block head %}
+    <title>Study Pup</title>    
+    <link rel="stylesheet" type="text/css" href="static/css/style.css">
+    <style>body {background-image: url(static/assets/studypup-bg.png);}</style>
+{% endblock %}
+
 {% block content %}
-
-<h1>Welcome to Study Pup</h1>
-<hr />
-<p>Plase sign in</p>
-
+    <a class="play" href="/game1">Play</a>
+    <img src="../static/assets/studypup-characters.png" class="characters-img">
 {% endblock %}
