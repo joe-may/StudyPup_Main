@@ -116,6 +116,7 @@
       }
     
       create() {
+        
       }
     
     }
@@ -128,16 +129,16 @@
     height: window.innerHeight * window.devicePixelRatio,
     transparent:true,
     physics: {
-    default: "arcade",
-    arcade: {
-      gravity: { x: 0, y: 0 },
-      debug: true
-    }
+      default: "arcade",
+      arcade: {
+        gravity: { x: 0, y: 0 },
+        debug: true
+      }
     },
     scene: [
-    MainMenu,
-    GamePlay,
-    SceneGameOver
+      MainMenu,
+      GamePlay,
+      SceneGameOver
     ],
     pixelArt: true,
     roundPixels: true
