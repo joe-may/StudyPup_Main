@@ -6,21 +6,22 @@
     <script>
       
       //Defines the planet globally
-      window.planet = "snowcon";
+      let planet = "snowcon";
       
       // Creates Main Menu
       class MainMenu extends Phaser.Scene {
-          
-         
+
           constructor() {
             super({ key: "MainMenu" });
           }
           
           preload() {
+            this.load.image("PlayBtn", "../static/assets/snowcon/PlayBtn.png"); 
             this.load.image("background", "../static/assets/snowcon/background.png");  
             this.load.image("floor", "../static/assets/snowcon/floor.png");
             this.load.image("player", "../static/assets/snowcon/player.png");
             this.load.image("sky","../static/assets/snowcon/sky.png");
+<<<<<<< HEAD
             
             
               this.load.image("PlayBtn", "../static/assets/snowcon/PlayBtn.png"); 
@@ -36,6 +37,10 @@
               
               
 
+=======
+            this.load.image("enemy", "../static/assets/snowcon/enemy.png");
+            this.load.image("amo", "../static/assets/snowcon/amo.png");
+>>>>>>> b5797c726797dfd1b86f09ac0352b3868aa6241d
           }
       
           create() {
@@ -43,8 +48,11 @@
               this.aGrid=new AlignGrid({scene:this,rows:11,cols:11});
 
               // Add Background
-              this.background = this.add.image(0, 0, "background").setOrigin(0, 0);
-              Align.scaleToGameW(this.background,1);
+              let background = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, 'background')
+              let scaleX = this.cameras.main.width / background.width
+              let scaleY = this.cameras.main.height / background.height
+              let scale = Math.max(scaleX, scaleY)
+              background.setScale(scale).setScrollFactor(0)
 
               // Add Play Button
               this.PlayBtn = this.add.image(500, 0, "PlayBtn");
@@ -62,6 +70,7 @@
               // place grid over for reference
               this.aGrid.showNumbers();
 
+<<<<<<< HEAD
               //Add GamePad
               this.gamePad=new GamePad({scene:this,grid:this.aGrid});
 
@@ -69,55 +78,24 @@
 
           }
         
+=======
+          }  
+>>>>>>> b5797c726797dfd1b86f09ac0352b3868aa6241d
       }
     
       class GamePlay extends Phaser.Scene {
 
-          constructor() {
-              super({ key: "GamePlay" });
-          }
+        constructor() {
+            super({ key: "GamePlay" });
+        }
+  
+        preload() {
+          
+        }
     
-          preload() {
-              
-            
+        create() {
 
-              
-              
-              this.load.spritesheet("sprExplosion", "../static/assets/sprExplosion.png", {
-                  frameWidth: 32,
-                  frameHeight: 32
-              });
-              this.load.spritesheet("sprEnemy0", "../static/assets/sprEnemy0.png", {
-                  frameWidth: 16,
-                  frameHeight: 16
-              });
-              this.load.image("sprEnemy1", "../static/assets/{planet}/sprEnemy1.png");
-              this.load.spritesheet("sprEnemy2", "../static/assets/sprEnemy2.png", {
-                  frameWidth: 16,
-                  frameHeight: 16
-              });
-              this.load.image("sprLaserEnemy0", "../static/assets/snowball.png");
-              this.load.image("sprLaserPlayer", "../static/assets/snowball.png");
-              // this.load.spritesheet("obisprite", "../static/assets/obi-sprite.png", {
-              //     frameWidth: 81,
-              //     frameHeight: 81
-              // });
-              
-    
-              this.load.audio("sndExplode0", "../static/assets/sndExplode0.wav");
-              this.load.audio("sndExplode1", "../static/assets/sndExplode1.wav");
-              this.load.audio("sndLaser", "../static/assets/sndLaser.wav");
-          }
-    
-    create() {
-
-      // Create Grid System
-      this.aGrid=new AlignGrid({scene:this,rows:11,cols:11});
-
-      // Add Background
-      this.background = this.add.image(0, 0, "background").setOrigin(0, 0);
-      Align.scaleToGameW(this.background,1);
-
+<<<<<<< HEAD
       // Add Floorground
       let floor = this.physics.add.image(game.config.width/2, game.config.height ,"floor");
       floor.displayWidth = game.config.width*1.1;
@@ -139,284 +117,64 @@
       
       //this.aGrid.placeAtIndex(115, this.floorground);
       // Align.In.BottomCenter(this.floorground);
+=======
+          // Create Grid System
+          this.aGrid=new AlignGrid({scene:this,rows:11,cols:11});
+>>>>>>> b5797c726797dfd1b86f09ac0352b3868aa6241d
 
+          // Add Background
+          let background = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, 'background')
+          let scaleX = this.cameras.main.width / background.width
+          let scaleY = this.cameras.main.height / background.height
+          let scale = Math.max(scaleX, scaleY)
+          background.setScale(scale).setScrollFactor(0)
 
+<<<<<<< HEAD
     this.groundLayer = map.createDynamicLayer('World', groundTiles, 0, 0);
     // the player will collide with this layer
     this.groundLayer.setCollisionByExclusion([-1]);
+=======
+          // Add Floorground
+          let floor = this.physics.add.image(game.config.width/2, game.config.height ,"floor");
+          floor.displayWidth = game.config.width*1.1;
+          floor.displayHeight = game.config.height*.25;
+          floor.setImmovable();
+>>>>>>> b5797c726797dfd1b86f09ac0352b3868aa6241d
 
+          // add sky
+          let sky = this.add.image(game.config.width/2,0, "sky");
+          sky.displayWidth = game.config.width*1.1;
+          sky.displayHeight = game.config.height*.25;
 
+          // add player
+          let player = this.physics.add.sprite(game.config.width/2,game.config.height*.7,"player");
+          Align.scaleToGameW(player,.1);
+          player.setGravityY(1000);
 
-
-      this.anims.create({
-        key: "sprEnemy0",
-        frames: this.anims.generateFrameNumbers("sprEnemy0"),
-        frameRate: 20,
-        repeat: -1
-      });
-      this.anims.create({
-        key: "sprEnemy2",
-        frames: this.anims.generateFrameNumbers("sprEnemy2"),
-        frameRate: 20,
-        repeat: -1
-      });
-      this.anims.create({
-        key: "sprExplosion",
-        frames: this.anims.generateFrameNumbers("sprExplosion"),
-        frameRate: 20,
-        repeat: 0
-      });
-      
-      // this.anims.create({
-      //   key: 'obiLeft',
-      //   frames: this.anims.generateFrameNumbers('obisprite', { start: 0, end: 1 }),
-      //   frameRate: 10,
-      //   repeat: -1
-      // });
-    
-      // this.anims.create({
-      //   key: 'obiBack',
-      //   frames: [ { key: 'obisprite', frame: 3 } ]
-      // });
-    
-      // this.anims.create({
-      //   key: 'obiRight',
-      //   frames: this.anims.generateFrameNumbers('obisprite', { start: 4, end: 5 }),
-      //   frameRate: 10,
-      //   repeat: -1
-      // });
-      
-      this.sfx = {
-        explosions: [
-          this.sound.add("sndExplode0"),
-          this.sound.add("sndExplode1")
-        ],
-        laser: this.sound.add("sndLaser")
-      };
-    
-      this.player = new Player(
-        this,
-        this.game.config.width * 0.5,
-        this.game.config.height * 0.5,
-        "obisprite"
-      );
-
-      this.player.x = 400;
-      this.player.y = 400;
-    
-      this.keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-      this.cursors = this.input.keyboard.createCursorKeys();
-    
-      this.enemies = this.add.group();
-      this.enemyLasers = this.add.group();
-      this.playerLasers = this.add.group();
-    
-      this.time.addEvent({
-    
-        delay: 1000,
-    
-        callback: function() {
-        var enemy = null;
-    
-        if (Phaser.Math.Between(0, 10) >= 3) {
-          enemy = new GunShip(
-            this,
-            Phaser.Math.Between(0, this.game.config.width),
-            0
-          );
-        }
-        else if (Phaser.Math.Between(0, 10) >= 5) {
-          if (this.getEnemiesByType("ChaserShip").length < 5) {      
-            enemy = new ChaserShip(
-              this,
-              Phaser.Math.Between(0, this.game.config.width),
-              0
-            );
-          }
-        }
-        else {
-          enemy = new CarrierShip(
-            this,
-            Phaser.Math.Between(0, this.game.config.width),
-            0
-          );
-        }
-
-        if (enemy !== null) {
-          enemy.setScale(Phaser.Math.Between(10, 20) * 0.1);
-          this.enemies.add(enemy);
-        }
-      },
-      callbackScope: this,
-      loop: true
-    });
-    
-    this.physics.add.collider(this.playerLasers, this.enemies, function(playerLaser, enemy) {
-    if (enemy) {
-      if (enemy.onDestroy !== undefined) {
-        enemy.onDestroy();
+          // Makes the player land on solid ground and not fall through
+          this.physics.add.collider(player, floor);
+          
+        
+          this.keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+          this.cursors = this.input.keyboard.createCursorKeys();
+        
+          this.enemies = this.add.group();
+          this.enemyLasers = this.add.group();
+          this.playerLasers = this.add.group();
       }
-      enemy.explode(true);
-      playerLaser.destroy();
-    }
-    });
+
+      update() {
     
-    this.physics.add.overlap(this.player, this.enemies, function(player, enemy) {
-    if (!player.getData("isDead") &&
-        !enemy.getData("isDead")) {
-      player.explode(false);
-      player.onDestroy();
-      enemy.explode(true);
-    }
-    });
-    
-    this.physics.add.overlap(this.player, this.enemyLasers, function(player, laser) {
-    if (!player.getData("isDead") &&
-        !laser.getData("isDead")) {
-      player.explode(false);
-      player.onDestroy();
-      laser.destroy();
-    }
-    });
-    }
-    
-    getEnemiesByType(type) {
-    var arr = [];
-    for (var i = 0; i < this.enemies.getChildren().length; i++) {
-    var enemy = this.enemies.getChildren()[i];
-    if (enemy.getData("type") == type) {
-      arr.push(enemy);
-    }
-    }
-    return arr;
-    }
-    
-    update() {
-    
-    if (!this.player.getData("isDead")) {
-    this.player.update();
-    //   if (this.cursors.up.isDown) {
-    //     this.player.moveUp();
-    //   }
-    //   else if (this.cursors.down.isDown) {
-    //     this.player.moveDown();
-    //   }
-    if (this.cursors.left.isDown) {
-      this.player.moveLeft();
-      this.player.anims.play('obiLeft', true);
-    }
-    else if (this.cursors.right.isDown) {
-      this.player.moveRight();
-      this.player.anims.play('obiRight', true);
-    }
-    if (this.keySpace.isDown) {
-      this.player.setData("isShooting", true);
-      this.player.anims.play('obiBack');
-    }
-    else {
-      
-      this.player.setData("timerShootTick", this.player.getData("timerShootDelay") - 1);
-      this.player.setData("isShooting", false);
-      
-    }
-    }
-    
-    for (var i = 0; i < this.enemies.getChildren().length; i++) {
-    var enemy = this.enemies.getChildren()[i];
-    
-    enemy.update();
-    
-    if (enemy.x < -enemy.displayWidth ||
-      enemy.x > this.game.config.width + enemy.displayWidth ||
-      enemy.y < -enemy.displayHeight * 4 ||
-      enemy.y > this.game.config.height + enemy.displayHeight) {
-      if (enemy) {
-        if (enemy.onDestroy !== undefined) {
-          enemy.onDestroy();
-        }
-        enemy.destroy();
       }
     }
-    }
-    
-    for (var i = 0; i < this.enemyLasers.getChildren().length; i++) {
-    var laser = this.enemyLasers.getChildren()[i];
-    laser.update();
-    if (laser.x < -laser.displayWidth ||
-      laser.x > this.game.config.width + laser.displayWidth ||
-      laser.y < -laser.displayHeight * 4 ||
-      laser.y > this.game.config.height + laser.displayHeight) {
-      if (laser) {
-        laser.destroy();
-      }
-    }
-    }
-    
-    for (var i = 0; i < this.playerLasers.getChildren().length; i++) {
-    var laser = this.playerLasers.getChildren()[i];
-    laser.update();
-    if (laser.x < -laser.displayWidth ||
-      laser.x > this.game.config.width + laser.displayWidth ||
-      laser.y < -laser.displayHeight * 4 ||
-      laser.y > this.game.config.height + laser.displayHeight) {
-      if (laser) {
-        laser.destroy();
-      }
-    }
-    }
-    
-    
-    }
-    }
+
     class SceneGameOver extends Phaser.Scene {
-    constructor() {
-    super({ key: "SceneGameOver" });
-    }
-    create() {
+      constructor() {
+        super({ key: "SceneGameOver" });
+      }
     
-    this.title = this.add.text(this.game.config.width * 0.5, 128, "GAME OVER", {
-    fontFamily: 'monospace',
-    fontSize: 48,
-    fontStyle: 'bold',
-    color: '#ffffff',
-    align: 'center'
-    });
-    this.title.setOrigin(0.5);
-    
-    this.sfx = {
-    btnOver: this.sound.add("sndBtnOver"),
-    btnDown: this.sound.add("sndBtnDown")
-    };
-    
-    this.btnRestart = this.add.sprite(
-    this.game.config.width * 0.5,
-    this.game.config.height * 0.5,
-    "sprBtnRestart"
-    );
-    
-    this.btnRestart.setInteractive();
-    
-    this.btnRestart.on("pointerover", function() {
-    this.btnRestart.setTexture("sprBtnRestartHover"); // set the button texture to sprBtnPlayHover
-    this.sfx.btnOver.play(); // play the button over sound
-    }, this);
-    
-    this.btnRestart.on("pointerout", function() {
-    this.setTexture("sprBtnRestart");
-    });
-    
-    this.btnRestart.on("pointerdown", function() {
-    this.btnRestart.setTexture("sprBtnRestartDown");
-    this.sfx.btnDown.play();
-    }, this);
-    
-    this.btnRestart.on("pointerup", function() {
-    this.btnRestart.setTexture("sprBtnRestart");
-    this.scene.start("GamePlay");
-    }, this);
-    
-    
-    }
+      create() {
+      }
     
     }
     //var pixelRatio = scene.sys.game.device.os.pixelRatio;
