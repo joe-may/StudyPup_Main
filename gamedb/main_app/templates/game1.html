@@ -3,32 +3,42 @@
 {% block head %}
     <title>Study Pup</title>    
     <link rel="stylesheet" type="text/css" href="../static/css/style.css">
-    <style>body {background-image: url(../static/assets/snowground.png);}</style>
     <script src="../static/js/phaser.js"></script>
     <script src="../static/js/Entities.js"></script>
     <script>
+      
+      //Defines the planet globally
+      window.planet = "snowcon";
+      
+      // Creates Main Menu
       class MainMenu extends Phaser.Scene {
+          
+         
           constructor() {
             super({ key: "MainMenu" });
           }
           
           preload() {
-              this.load.image("sprBg0", "../static/assets/snowfall1.png");
-              this.load.image("PlayBtn", "../static/assets/sprBtnPlay.png");
-              this.load.image("sprBtnRestart", "../static/assets/sprBtnRestart.png");
+              this.load.image("PlayBtn", "../static/assets/snowcon/PlayBtn.png");
+              this.load.image("background", "../static/assets/snowcon/background.png");
+              this.load.image("foreground", "../static/assets/snowcon/foreground.png");
+              this.load.image("hero", "../static/assets/snowcon/hero.png");
+              this.load.image("enemy", "../static/assets/snowcon/enemy.png");
+              this.load.image("amo", "../static/assets/snowcon/amo.png");
           }
       
           create() {
 
-              this.btnPlay = this.add.sprite(
-                  this.game.config.width * 0.5,
-                  this.game.config.height * 0.5,
-                  "PlayBtn"
-              );
-      
-              this.btnPlay.setInteractive();
-      
-              this.btnPlay.on("pointerup", function() {
+              // Insert Background Image
+              this.add.image(0, 0, "background").setOrigin(0, 0);
+              background.Width = 1000;
+
+              // Insert Play Button 
+              this.PlayBtn = this.add.image(500, 0, "PlayBtn");
+              // Make the playbutton interactive (see phaser docs for "setInteractive" to get more info)
+              this.PlayBtn.setInteractive();
+              // When clicking the button, start the game play
+              this.PlayBtn.on("pointerup", function() {
                   this.scene.start("GamePlay");
               }, this);
 
@@ -50,7 +60,7 @@
                   frameWidth: 16,
                   frameHeight: 16
               });
-              this.load.image("sprEnemy1", "../static/assets/sprEnemy1.png");
+              this.load.image("sprEnemy1", "../static/assets/{planet}/sprEnemy1.png");
               this.load.spritesheet("sprEnemy2", "../static/assets/sprEnemy2.png", {
                   frameWidth: 16,
                   frameHeight: 16
@@ -344,8 +354,8 @@
     var config = {
     type: Phaser.WEBGL,
     mode: Phaser.Scale.FIT,
-    width: 1000,
-    height: 462,
+    width: window.innerWidth * window.devicePixelRatio,
+    height: window.innerHeight * window.devicePixelRatio,
     transparent:true,
     physics: {
     default: "arcade",
