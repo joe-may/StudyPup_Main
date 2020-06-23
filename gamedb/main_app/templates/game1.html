@@ -225,12 +225,7 @@
     
     if (!this.player.getData("isDead")) {
     this.player.update();
-    //   if (this.cursors.up.isDown) {
-    //     this.player.moveUp();
-    //   }
-    //   else if (this.cursors.down.isDown) {
-    //     this.player.moveDown();
-    //   }
+
     if (this.cursors.left.isDown) {
       this.player.moveLeft();
       this.player.anims.play('obiLeft', true);
