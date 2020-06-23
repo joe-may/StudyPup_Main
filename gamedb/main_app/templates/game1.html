@@ -97,14 +97,16 @@
       Align.scaleToGameW(this.background,1);
 
       // Add Floorground
-      this.floorground = this.add.image(0,0,'foreground');
+      // this.floorground = this.add.image(0,0,'foreground');
       
-      //Align.To.BOTTOM_CENTER(this.floorground);
-      Align.scaleToGameW(this.floorground,1);
-      this.aGrid.placeAtIndex(115, this.floorground);
-      // Align.In.BottomCenter(this.floorground);
+      // //Align.To.BOTTOM_CENTER(this.floorground);
+      // Align.scaleToGameW(this.floorground,1);
+      // this.aGrid.placeAtIndex(115, this.floorground);
+      // // Align.In.BottomCenter(this.floorground);
 
-
+    this.groundLayer = map.createDynamicLayer('World', groundTiles, 0, 0);
+    // the player will collide with this layer
+    this.groundLayer.setCollisionByExclusion([-1]);
 
 
       this.anims.create({
