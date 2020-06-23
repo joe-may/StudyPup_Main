@@ -17,9 +17,14 @@
           }
           
           preload() {
-              this.load.image("PlayBtn", "../static/assets/snowcon/PlayBtn.png");
-              this.load.image("background", "../static/assets/snowcon/background.png");
-              this.load.image("foreground", "../static/assets/snowcon/foreground.png");
+            this.load.image("background", "../static/assets/snowcon/background.png");  
+            this.load.image("floor", "../static/assets/snowcon/floor.png");
+            this.load.image("player", "../static/assets/snowcon/player.png");
+            this.load.image("sky","../static/assets/snowcon/sky.png");
+            
+            
+            this.load.image("PlayBtn", "../static/assets/snowcon/PlayBtn.png"); 
+              this.load.image("foreground", "../static/assets/snowcon/floor.png");
               this.load.image("hero", "../static/assets/snowcon/hero.png");
               this.load.image("enemy", "../static/assets/snowcon/enemy.png");
               this.load.image("amo", "../static/assets/snowcon/amo.png");
@@ -35,8 +40,8 @@
 
               // Add Play Button
               this.PlayBtn = this.add.image(500, 0, "PlayBtn");
-              this.aGrid.placeAtIndex(115, this.PlayBtn);
-              Align.scaleToGameW(this.PlayBtn,1);
+              this.aGrid.placeAtIndex(60, this.PlayBtn);
+              Align.scaleToGameW(this.PlayBtn,.15);
 
               // Make the playbutton interactive (see phaser docs for "setInteractive" to get more info)
               this.PlayBtn.setInteractive();
@@ -60,8 +65,11 @@
           }
     
           preload() {
-              this.load.image("foreground", "../static/assets/snowcon/foreground.png");
+              
+            
 
+              
+              
               this.load.spritesheet("sprExplosion", "../static/assets/sprExplosion.png", {
                   frameWidth: 32,
                   frameHeight: 32
@@ -77,10 +85,11 @@
               });
               this.load.image("sprLaserEnemy0", "../static/assets/snowball.png");
               this.load.image("sprLaserPlayer", "../static/assets/snowball.png");
-              this.load.spritesheet("obisprite", "../static/assets/obi-sprite.png", {
-                  frameWidth: 81,
-                  frameHeight: 81
-              });
+              // this.load.spritesheet("obisprite", "../static/assets/obi-sprite.png", {
+              //     frameWidth: 81,
+              //     frameHeight: 81
+              // });
+              
     
               this.load.audio("sndExplode0", "../static/assets/sndExplode0.wav");
               this.load.audio("sndExplode1", "../static/assets/sndExplode1.wav");
@@ -97,12 +106,29 @@
       Align.scaleToGameW(this.background,1);
 
       // Add Floorground
-      this.floorground = this.add.image(0,0,'foreground');
+      let floor = this.physics.add.image(game.config.width/2, game.config.height ,"floor");
+      floor.displayWidth = game.config.width*1.1;
+      floor.displayHeight = game.config.height*.25;
+      floor.setImmovable();
+
+      let sky = this.add.image(game.config.width/2,0, "sky");
+      sky.displayWidth = game.config.width*1.1;
+      sky.displayHeight = game.config.height*.25;
+
+
+      let player = this.physics.add.sprite(game.config.width/2,game.config.height*.7,"player");
+      Align.scaleToGameW(player,.1);
+      player.setGravityY(1000);
+
+      this.physics.add.collider(player, floor);
+      //Align.scaleToGameW(floor,1);
       
       //Align.To.BOTTOM_CENTER(this.floorground);
-      Align.scaleToGameW(this.floorground,1);
-      this.aGrid.placeAtIndex(115, this.floorground);
+      
+      //this.aGrid.placeAtIndex(115, this.floorground);
       // Align.In.BottomCenter(this.floorground);
+
+
 
 
 
@@ -126,24 +152,24 @@
         repeat: 0
       });
       
-      this.anims.create({
-        key: 'obiLeft',
-        frames: this.anims.generateFrameNumbers('obisprite', { start: 0, end: 1 }),
-        frameRate: 10,
-        repeat: -1
-      });
+      // this.anims.create({
+      //   key: 'obiLeft',
+      //   frames: this.anims.generateFrameNumbers('obisprite', { start: 0, end: 1 }),
+      //   frameRate: 10,
+      //   repeat: -1
+      // });
     
-      this.anims.create({
-        key: 'obiBack',
-        frames: [ { key: 'obisprite', frame: 3 } ]
-      });
+      // this.anims.create({
+      //   key: 'obiBack',
+      //   frames: [ { key: 'obisprite', frame: 3 } ]
+      // });
     
-      this.anims.create({
-        key: 'obiRight',
-        frames: this.anims.generateFrameNumbers('obisprite', { start: 4, end: 5 }),
-        frameRate: 10,
-        repeat: -1
-      });
+      // this.anims.create({
+      //   key: 'obiRight',
+      //   frames: this.anims.generateFrameNumbers('obisprite', { start: 4, end: 5 }),
+      //   frameRate: 10,
+      //   repeat: -1
+      // });
       
       this.sfx = {
         explosions: [
@@ -389,7 +415,8 @@
     physics: {
     default: "arcade",
     arcade: {
-    gravity: { x: 0, y: 0 }
+      gravity: { x: 0, y: 0 },
+      debug: true
     }
     },
     scene: [
