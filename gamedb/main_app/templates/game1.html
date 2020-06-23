@@ -23,11 +23,19 @@
             this.load.image("sky","../static/assets/snowcon/sky.png");
             
             
-            this.load.image("PlayBtn", "../static/assets/snowcon/PlayBtn.png"); 
+              this.load.image("PlayBtn", "../static/assets/snowcon/PlayBtn.png"); 
               this.load.image("foreground", "../static/assets/snowcon/floor.png");
-              this.load.image("hero", "../static/assets/snowcon/hero.png");
-              this.load.image("enemy", "../static/assets/snowcon/enemy.png");
-              this.load.image("amo", "../static/assets/snowcon/amo.png");
+              this.load.image("player", "../static/assets/snowcon/player.png");
+              // this.load.image("enemyone", "../static/assets/snowcon/enemyone.png");
+              // this.load.image("snowball", "../static/assets/snowcon/snowball.png");
+
+             
+              ///adding gamePad
+              this.load.image("cross", "../static/assets/controls/cross.png");
+              this.load.image("redButton", "../static/assets/controls/redButton.png");
+              
+              
+
           }
       
           create() {
@@ -54,8 +62,13 @@
               // place grid over for reference
               this.aGrid.showNumbers();
 
+              //Add GamePad
+              this.gamePad=new GamePad({scene:this,grid:this.aGrid});
+
+        
+
           }
-          
+        
       }
     
       class GamePlay extends Phaser.Scene {
@@ -106,14 +119,6 @@
       Align.scaleToGameW(this.background,1);
 
       // Add Floorground
-<<<<<<< HEAD
-      // this.floorground = this.add.image(0,0,'foreground');
-      
-      // //Align.To.BOTTOM_CENTER(this.floorground);
-      // Align.scaleToGameW(this.floorground,1);
-      // this.aGrid.placeAtIndex(115, this.floorground);
-      // // Align.In.BottomCenter(this.floorground);
-=======
       let floor = this.physics.add.image(game.config.width/2, game.config.height ,"floor");
       floor.displayWidth = game.config.width*1.1;
       floor.displayHeight = game.config.height*.25;
@@ -125,7 +130,6 @@
 
 
       let player = this.physics.add.sprite(game.config.width/2,game.config.height*.7,"player");
-      Align.scaleToGameW(player,.1);
       player.setGravityY(1000);
 
       this.physics.add.collider(player, floor);
@@ -136,7 +140,6 @@
       //this.aGrid.placeAtIndex(115, this.floorground);
       // Align.In.BottomCenter(this.floorground);
 
->>>>>>> 90610f2ffcf941c3f4933afa188071b8442ac0cb
 
     this.groundLayer = map.createDynamicLayer('World', groundTiles, 0, 0);
     // the player will collide with this layer
