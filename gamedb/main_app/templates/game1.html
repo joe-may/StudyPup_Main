@@ -26,13 +26,17 @@
           }
       
           create() {
+              // Create Grid System
+              this.aGrid=new AlignGrid({scene:this,rows:11,cols:11});
 
-              // Insert Background Image
-              this.add.image(0, 0, "background").setOrigin(0, 0);
-              background.displayWidth = game.canvas.width;
+              // Add Background
+              this.background = this.add.image(0, 0, "background").setOrigin(0, 0);
+              Align.scaleToGameW(this.background,1);
 
-              // Insert Play Button 
+              // Add Play Button
               this.PlayBtn = this.add.image(500, 0, "PlayBtn");
+              this.aGrid.placeAtIndex(115, this.PlayBtn);
+              Align.scaleToGameW(this.PlayBtn,1);
 
               // Make the playbutton interactive (see phaser docs for "setInteractive" to get more info)
               this.PlayBtn.setInteractive();
@@ -42,16 +46,22 @@
                   this.scene.start("GamePlay");
               }, this);
 
+              // place grid over for reference
+              this.aGrid.showNumbers();
+
           }
           
       }
     
       class GamePlay extends Phaser.Scene {
+
           constructor() {
               super({ key: "GamePlay" });
           }
     
           preload() {
+              this.load.image("foreground", "../static/assets/snowcon/foreground.png");
+
               this.load.spritesheet("sprExplosion", "../static/assets/sprExplosion.png", {
                   frameWidth: 32,
                   frameHeight: 32
@@ -78,6 +88,25 @@
           }
     
     create() {
+
+      // Create Grid System
+      this.aGrid=new AlignGrid({scene:this,rows:11,cols:11});
+
+      // Add Background
+      this.background = this.add.image(0, 0, "background").setOrigin(0, 0);
+      Align.scaleToGameW(this.background,1);
+
+      // Add Floorground
+      this.floorground = this.add.image(0,0,'foreground');
+      
+      //Align.To.BOTTOM_CENTER(this.floorground);
+      Align.scaleToGameW(this.floorground,1);
+      this.aGrid.placeAtIndex(115, this.floorground);
+      // Align.In.BottomCenter(this.floorground);
+
+
+
+
       this.anims.create({
         key: "sprEnemy0",
         frames: this.anims.generateFrameNumbers("sprEnemy0"),
