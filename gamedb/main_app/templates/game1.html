@@ -2,9 +2,7 @@
 
 {% block head %}
     <title>Study Pup</title>    
-    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
-    <script src="../static/js/phaser.js"></script>
-    <script src="../static/js/Entities.js"></script>
+    
     <script>
       
       //Defines the planet globally
@@ -31,12 +29,14 @@
 
               // Insert Background Image
               this.add.image(0, 0, "background").setOrigin(0, 0);
-              background.displayWidth = game.config.width;
+              background.displayWidth = game.canvas.width;
 
               // Insert Play Button 
               this.PlayBtn = this.add.image(500, 0, "PlayBtn");
+
               // Make the playbutton interactive (see phaser docs for "setInteractive" to get more info)
               this.PlayBtn.setInteractive();
+
               // When clicking the button, start the game play
               this.PlayBtn.on("pointerup", function() {
                   this.scene.start("GamePlay");
@@ -225,7 +225,12 @@
     
     if (!this.player.getData("isDead")) {
     this.player.update();
-
+    //   if (this.cursors.up.isDown) {
+    //     this.player.moveUp();
+    //   }
+    //   else if (this.cursors.down.isDown) {
+    //     this.player.moveDown();
+    //   }
     if (this.cursors.left.isDown) {
       this.player.moveLeft();
       this.player.anims.play('obiLeft', true);
