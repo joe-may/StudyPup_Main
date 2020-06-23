@@ -35,8 +35,11 @@
               this.aGrid=new AlignGrid({scene:this,rows:11,cols:11});
 
               // Add Background
-              this.background = this.add.image(0, 0, "background").setOrigin(0, 0);
-              Align.scaleToGameW(this.background,1);
+              let background = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, 'background')
+              let scaleX = this.cameras.main.width / background.width
+              let scaleY = this.cameras.main.height / background.height
+              let scale = Math.max(scaleX, scaleY)
+              background.setScale(scale).setScrollFactor(0)
 
               // Add Play Button
               this.PlayBtn = this.add.image(500, 0, "PlayBtn");
@@ -65,10 +68,7 @@
           }
     
           preload() {
-              
             
-
-              
               
               this.load.spritesheet("sprExplosion", "../static/assets/sprExplosion.png", {
                   frameWidth: 32,
@@ -102,8 +102,12 @@
       this.aGrid=new AlignGrid({scene:this,rows:11,cols:11});
 
       // Add Background
-      this.background = this.add.image(0, 0, "background").setOrigin(0, 0);
-      Align.scaleToGameW(this.background,1);
+      let background = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, 'background')
+      let scaleX = this.cameras.main.width / background.width
+      let scaleY = this.cameras.main.height / background.height
+      let scale = Math.max(scaleX, scaleY)
+      background.setScale(scale).setScrollFactor(0)
+
 
       // Add Floorground
       let floor = this.physics.add.image(game.config.width/2, game.config.height ,"floor");
@@ -111,25 +115,18 @@
       floor.displayHeight = game.config.height*.25;
       floor.setImmovable();
 
+      // add sky
       let sky = this.add.image(game.config.width/2,0, "sky");
       sky.displayWidth = game.config.width*1.1;
       sky.displayHeight = game.config.height*.25;
 
-
+      // add player
       let player = this.physics.add.sprite(game.config.width/2,game.config.height*.7,"player");
       Align.scaleToGameW(player,.1);
       player.setGravityY(1000);
 
+      // make player and floor collide and shit
       this.physics.add.collider(player, floor);
-      //Align.scaleToGameW(floor,1);
-      
-      //Align.To.BOTTOM_CENTER(this.floorground);
-      
-      //this.aGrid.placeAtIndex(115, this.floorground);
-      // Align.In.BottomCenter(this.floorground);
-
-
-
 
 
 
