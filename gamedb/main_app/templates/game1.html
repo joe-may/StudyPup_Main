@@ -21,26 +21,10 @@
             this.load.image("floor", "../static/assets/snowcon/floor.png");
             this.load.image("player", "../static/assets/snowcon/player.png");
             this.load.image("sky","../static/assets/snowcon/sky.png");
-<<<<<<< HEAD
-            
-            
-              this.load.image("PlayBtn", "../static/assets/snowcon/PlayBtn.png"); 
-              this.load.image("foreground", "../static/assets/snowcon/floor.png");
-              this.load.image("player", "../static/assets/snowcon/player.png");
-              // this.load.image("enemyone", "../static/assets/snowcon/enemyone.png");
-              // this.load.image("snowball", "../static/assets/snowcon/snowball.png");
-
-             
-              ///adding gamePad
-              this.load.image("cross", "../static/assets/controls/cross.png");
-              this.load.image("redButton", "../static/assets/controls/redButton.png");
-              
-              
-
-=======
             this.load.image("enemy", "../static/assets/snowcon/enemy.png");
             this.load.image("amo", "../static/assets/snowcon/amo.png");
->>>>>>> b5797c726797dfd1b86f09ac0352b3868aa6241d
+            this.load.image("cross", "../static/assets/controls/cross.png");
+            this.load.image("redButton", "../static/assets/controls/redButton.png"); 
           }
       
           create() {
@@ -70,17 +54,10 @@
               // place grid over for reference
               this.aGrid.showNumbers();
 
-<<<<<<< HEAD
               //Add GamePad
               this.gamePad=new GamePad({scene:this,grid:this.aGrid});
-
-        
-
           }
         
-=======
-          }  
->>>>>>> b5797c726797dfd1b86f09ac0352b3868aa6241d
       }
     
       class GamePlay extends Phaser.Scene {
@@ -95,32 +72,8 @@
     
         create() {
 
-<<<<<<< HEAD
-      // Add Floorground
-      let floor = this.physics.add.image(game.config.width/2, game.config.height ,"floor");
-      floor.displayWidth = game.config.width*1.1;
-      floor.displayHeight = game.config.height*.25;
-      floor.setImmovable();
-
-      let sky = this.add.image(game.config.width/2,0, "sky");
-      sky.displayWidth = game.config.width*1.1;
-      sky.displayHeight = game.config.height*.25;
-
-
-      let player = this.physics.add.sprite(game.config.width/2,game.config.height*.7,"player");
-      player.setGravityY(1000);
-
-      this.physics.add.collider(player, floor);
-      //Align.scaleToGameW(floor,1);
-      
-      //Align.To.BOTTOM_CENTER(this.floorground);
-      
-      //this.aGrid.placeAtIndex(115, this.floorground);
-      // Align.In.BottomCenter(this.floorground);
-=======
           // Create Grid System
           this.aGrid=new AlignGrid({scene:this,rows:11,cols:11});
->>>>>>> b5797c726797dfd1b86f09ac0352b3868aa6241d
 
           // Add Background
           let background = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, 'background')
@@ -129,17 +82,11 @@
           let scale = Math.max(scaleX, scaleY)
           background.setScale(scale).setScrollFactor(0)
 
-<<<<<<< HEAD
-    this.groundLayer = map.createDynamicLayer('World', groundTiles, 0, 0);
-    // the player will collide with this layer
-    this.groundLayer.setCollisionByExclusion([-1]);
-=======
           // Add Floorground
           let floor = this.physics.add.image(game.config.width/2, game.config.height ,"floor");
           floor.displayWidth = game.config.width*1.1;
           floor.displayHeight = game.config.height*.25;
           floor.setImmovable();
->>>>>>> b5797c726797dfd1b86f09ac0352b3868aa6241d
 
           // add sky
           let sky = this.add.image(game.config.width/2,0, "sky");
@@ -174,7 +121,7 @@
       }
     
       create() {
-        
+
       }
     
     }
